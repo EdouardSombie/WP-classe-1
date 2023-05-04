@@ -8,7 +8,7 @@
 
 		<?php 
 		if(!is_front_page()){
-			echo 'pas Accueil !!';
+			get_template_part('template-parts/posts-list');
 		}
 		?>
 

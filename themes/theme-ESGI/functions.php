@@ -3,7 +3,7 @@
 add_action( 'after_setup_theme', 'esgi_setup_theme', 0);
 function esgi_setup_theme(){
 	add_theme_support( 'custom-logo' );
-
+	add_theme_support( 'post-thumbnails' );
 	/* Enregistrement des emplacements de menu */
 	register_nav_menus( array(
 	    	'main_menu' => 'Menu principal',
