@@ -51,7 +51,24 @@ figure{
 }
 
 .single-post{
-	header{
+	.post-infos{
+		font-family: $font2;
+		font-size: rem(13);
+		line-height: rem(21);
+		letter-spacing: 0.05em;
+		text-align: center;
+		margin-bottom: rem(34);
+		display: flex;
+		justify-content: center;
+		gap: rem(24);
+		& > div{
+			display: flex;
+			align-items: center;
+		}
+		align-items: center;
+		time{
+			margin-left: rem(42);
+		}
 		img{
 			object-fit: cover;
 			object-position: center;
@@ -60,18 +77,10 @@ figure{
 			height: rem(32);
 			margin-right: rem(10);
 		}
-		.post-meta{
-			font-family: $font2;
-			font-size: rem(13);
-			line-height: rem(21);
-			letter-spacing: 0.05em;
-			text-align: center;
-			margin-bottom: rem(34);
-			time{
-				margin-left: rem(42);
-			}
-		}
 	}
+
+	
+
 	.post-image{
 		margin-bottom: rem(34);
 		img{

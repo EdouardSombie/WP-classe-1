@@ -4609,24 +4609,32 @@ figure {
   text-decoration: underline;
 }
 
-.single-post header img {
-  object-fit: cover;
-  object-position: center;
-  border-radius: 800px;
-  width: 2rem;
-  height: 2rem;
-  margin-right: 0.625rem;
-}
-.single-post header .post-meta {
+.single-post .post-infos {
   font-family: "Overpass", sans-serif;
   font-size: 0.8125rem;
   line-height: 1.3125rem;
   letter-spacing: 0.05em;
   text-align: center;
   margin-bottom: 2.125rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  align-items: center;
 }
-.single-post header .post-meta time {
+.single-post .post-infos > div {
+  display: flex;
+  align-items: center;
+}
+.single-post .post-infos time {
   margin-left: 2.625rem;
+}
+.single-post .post-infos img {
+  object-fit: cover;
+  object-position: center;
+  border-radius: 800px;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.625rem;
 }
 .single-post .post-image {
   margin-bottom: 2.125rem;
