@@ -1,4 +1,4 @@
-		<footer>
+		<footer id="site-footer">
 			<div class="container">
 				©2023 Edouard Sombié
 			</div>

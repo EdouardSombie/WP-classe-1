@@ -7,11 +7,11 @@
 			<?php 
 			if(is_front_page()){
 				get_template_part('template-parts/identity-card');
-			}else{
-				 the_title();
-				 the_content();
-			}
-			?>
+			}else{ ?>
+				 <h1 class="page-title"> <?php the_title(); ?> </h1>
+				 <div class="page-content"> <?php the_content(); ?> </div>
+			
+			<?php } ?>
 		</div>
 	</div>
 

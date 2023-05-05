@@ -19,6 +19,11 @@ Text Domain: ESGI
 @import 'vendor/normalize';
 @import 'partials/fonts';
 @import 'partials/colors';
+@import 'partials/functions';
 @import 'partials/globals';
+
 @import 'components/header';
+@import 'components/footer';
+@import 'components/posts-list';
+@import 'components/identity-card';
 
