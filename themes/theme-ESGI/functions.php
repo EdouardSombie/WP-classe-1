@@ -44,32 +44,93 @@ function getIcon($icon){
 }
 
 
+/* Options de personnalisation du thème */
+add_action( 'customize_register', 'esgi_customize_register' );
+function esgi_customize_register( $wp_customize ) {
+	// Ajouter une section au customizer
+	$wp_customize->add_section( 'section_esgi', array(
+	  'title' =>  'Réglages thème ESGI',
+	  'description' => 'Faites-vous plaisir !',
+	  'priority' => 1,
+	) );
 
 
+	// Ajout des réglages du thème
+	$wp_customize->add_setting('main_color', array(
+		'type' => 'theme_mod',
+		'transport' => 'refresh',
+		'default' => '#3F51B5',
+  		'sanitize_callback' => 'sanitize_hex_color',
+	));
+
+	$wp_customize->add_setting('is_dark', array(
+		'type' => 'theme_mod',
+		'transport' => 'refresh',
+		'default' => false,
+  		'sanitize_callback' => 'esgi_sanitize_boolean',
+	));
+
+	$wp_customize->add_setting('has_sidebar', array(
+		'type' => 'theme_mod',
+		'transport' => 'refresh',
+		'default' => false,
+  		'sanitize_callback' => 'esgi_sanitize_boolean',
+	));
+
+	// Ajout des controles à la section
+
+	$wp_customize->add_control( 'is_dark', array(
+	  'type' => 'checkbox',
+	  'section' => 'section_esgi', // Required, core or custom.
+	  'label' => __( 'Passer le thème en mode sombre.' ),
+	) );
+
+	$wp_customize->add_control( 'has_sidebar', array(
+	  'type' => 'checkbox',
+	  'section' => 'section_esgi', // Required, core or custom.
+	  'label' => __( 'Afficher la barre latérale sur les pages articles.' ),
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
+		'main_color', array(
+	  	'label' => __( 'Couleur principale du thème.'),
+	  	'section' => 'section_esgi',
+	) ) );
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function mytheme_register_nav_menu(){
-		
+function esgi_sanitize_boolean($value){
+	if(!is_bool($value)){
+		return false;
 	}
-	add_action( 'after_setup_theme', 'mytheme_register_nav_menu', 0 );
+	return $value;
+}
+
+
+/* Prise en compte du theme modifier 'is_dark' */
+
+// 'surcharger le filtre body_class'
+add_filter('body_class', 'esgi_body_class');
+
+function esgi_body_class($classes){
+	$is_dark = get_theme_mod('is_dark', false);
+	if($is_dark){
+		$classes[] = 'dark';
+	}
+	return $classes;
+}
+
+
+add_action( 'wp_head', 'esgi_css_output');
+function esgi_css_output(){
+	$main_color = get_theme_mod('main_color', '#3F51B5');
+	echo '<style>
+			 :root{
+			 	--main-color: ' . $main_color . ' 
+			  }
+		</style>';
+}
+
+
+
+
