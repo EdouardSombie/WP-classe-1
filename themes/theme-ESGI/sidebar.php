@@ -1,3 +1,3 @@
 <aside>
-	<p>Voila ma sidebar !!</p>
+	<?php dynamic_sidebar( 'zone-1' ); ?>
 </aside>

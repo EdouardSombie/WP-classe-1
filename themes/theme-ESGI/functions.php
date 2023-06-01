@@ -4,6 +4,8 @@ add_action( 'after_setup_theme', 'esgi_setup_theme', 0);
 function esgi_setup_theme(){
 	add_theme_support( 'custom-logo' );
 	add_theme_support( 'post-thumbnails' );
+	add_theme_support( 'widgets' );
+
 	/* Enregistrement des emplacements de menu */
 	register_nav_menus( array(
 	    	'main_menu' => 'Menu principal',
@@ -129,6 +131,22 @@ function esgi_css_output(){
 			 	--main-color: ' . $main_color . ' 
 			  }
 		</style>';
+}
+
+
+// Widget
+add_action('widgets_init', 'esgi_widgets_init');
+function esgi_widgets_init(){
+	register_sidebar([
+	  	'id' => 'zone-1',
+	    'name' => 'Zone des widgets de mla barre latérale',
+	    'before_widget' => '<div>',
+	    'after_widget' => '</div>',
+	    'before_title' => '<h3>',
+	    'after_title' => '</h3>',
+	  ]
+	);
+	  
 }
 
 

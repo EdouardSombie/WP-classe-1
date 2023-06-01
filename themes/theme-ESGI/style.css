@@ -4585,6 +4585,10 @@ figure {
   margin: 0;
 }
 
+a {
+  color: var(--main-color);
+}
+
 /* Styles des publications */
 .page-title, .post-title {
   text-align: center;
