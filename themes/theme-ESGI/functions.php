@@ -16,6 +16,19 @@ function esgi_setup_theme(){
 add_action( 'wp_enqueue_scripts', 'esgi_enqueue_assets', 1);
 function esgi_enqueue_assets(){
 	wp_enqueue_style('main', get_stylesheet_uri());
+	wp_enqueue_script('main-jquery', get_template_directory_uri() . '/assets/js/vendor/jquery-3.7.0.min.js');
+	wp_enqueue_script('main', get_template_directory_uri() . '/assets/js/main.js');
+
+	$big = 999999999; // need an unlikely integer
+	$base = str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) );
+
+	// Injection d'une variable dans le js
+	$variables = [
+		'ajaxURL' => admin_url('admin-ajax.php'),
+		'base' => $base
+	];
+	wp_localize_script('main', 'esgi', $variables);
+
 }
 
 
@@ -148,6 +161,31 @@ function esgi_widgets_init(){
 	);
 	  
 }
+
+
+// Routes ajax
+add_action( 'wp_ajax_load_posts', 'ajax_load_posts' );
+add_action( 'wp_ajax_nopriv_load_posts', 'ajax_load_posts' );
+
+function ajax_load_posts(){
+	// Parametre 'paged'
+	$paged = $_POST['page'];
+	$base = $_POST['base'];
+	// ouverture du cache php
+	ob_start();
+	// ecriture du contenu
+	include('template-parts/posts-list.php');
+	// Fermeture du cache et renvoi de son contenu
+	echo ob_get_clean();
+	die();
+}
+
+
+
+?>
+
+
+
 
 
 
